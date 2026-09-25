@@ -1,0 +1,195 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    background: #f5f7fb;
+}
+
+.login-page {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.login-brand-section {
+    background: linear-gradient(
+        135deg,
+        #0f172a,
+        #1e3a8a
+    );
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 60px;
+}
+
+.login-brand-section > div {
+    max-width: 520px;
+}
+
+.login-brand-section h1 {
+    font-size: 46px;
+    line-height: 1.15;
+    margin-bottom: 20px;
+}
+
+.login-brand-section p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #dbeafe;
+}
+
+.security-message {
+    margin-top: 35px;
+
+    display: inline-block;
+
+    padding: 12px 18px;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    border-radius: 8px;
+
+    font-size: 14px;
+}
+
+.login-form-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+
+    background: white;
+
+    padding: 40px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.login-header {
+    margin-bottom: 30px;
+}
+
+.login-header h2 {
+    margin: 0;
+    font-size: 30px;
+    color: #111827;
+}
+
+.login-header p {
+    color: #6b7280;
+    margin-top: 8px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #374151;
+    font-size: 14px;
+}
+
+.form-group input {
+    padding: 13px 14px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+.form-group input:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.login-button {
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.login-button:hover {
+    background: #1d4ed8;
+}
+
+.login-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.login-error {
+    background: #fee2e2;
+    color: #b91c1c;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+
+    font-size: 14px;
+}
+
+@media (max-width: 800px) {
+
+    .login-page {
+        grid-template-columns: 1fr;
+    }
+
+    .login-brand-section {
+        display: none;
+    }
+}
