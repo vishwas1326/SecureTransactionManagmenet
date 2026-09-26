@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: transaction-management
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: ${DB_URL:jdbc:mysql://localhost:3306/transaction-management}
+#    username: ${DB_USERNAME:root}
+#    password: ${DB_PASSWORD:root}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect
+    properties:
+      hibernate:
+        format_sql: true
+  h2:
+    console:
+      enabled: true
+
+  security:
+    jwt:
+      secret: ${JWT_SECRET}
+      expiration: 3600000
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:ec2-3-15-7-2.us-east-2.compute.amazonaws.com:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
+
+    consumer:
+      group-id: transaction-audit-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JacksonJsonDeSerializer
+      properties:
+        "[spring.json.trusted.packages]": "*"
+server:
+  port: 8081
