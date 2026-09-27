@@ -81,7 +81,8 @@ public class SecurityConfig {
                                 "/api/auth/**"
                         )
                         .permitAll()
-
+                        .requestMatchers("/actuator/health")
+                        .permitAll()
                         .requestMatchers(
                                 "/error"
                         )

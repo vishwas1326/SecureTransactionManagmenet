@@ -2,9 +2,9 @@ spring:
   application:
     name: transaction-management
   datasource:
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: ${DB_URL:jdbc:mysql://transaction-management.c5ww0m064qpc.us-east-2.rds.amazonaws.com:3306/transaction-management?sslMode=REQUIRED}
+    username: ${DB_USERNAME:admin}
+    password: ${DB_PASSWORD:vishwas123}
     driver-class-name: com.mysql.cj.jdbc.Driver
 #    url: ${DB_URL:jdbc:mysql://localhost:3306/transaction-management}
 #    username: ${DB_USERNAME:root}
@@ -23,7 +23,7 @@ spring:
 
   security:
     jwt:
-      secret: ${JWT_SECRET}
+      secret: ${JWT_SECRET:c2VjdXJlLXRyYW5zYWN0aW9uLW1hbmFnZW1lbnQtand0LXNlY3JldC0yMDI2}
       expiration: 3600000
   kafka:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:ec2-3-15-7-2.us-east-2.compute.amazonaws.com:9092}
@@ -39,3 +39,8 @@ spring:
         "[spring.json.trusted.packages]": "*"
 server:
   port: 8081
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
