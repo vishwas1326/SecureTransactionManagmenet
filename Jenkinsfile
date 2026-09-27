@@ -20,18 +20,18 @@ pipeline {
 
         stage('Unit Tests') {
             steps {
-                sh '''
-                    chmod +x mvnw
-                    ./mvnw test
-                '''
+                dir('backend') {
+                    sh 'chmod +x mvnw'
+                    sh './mvnw test'
+                }
             }
         }
 
         stage('Package') {
             steps {
-                sh '''
-                    ./mvnw clean package -DskipTests
-                '''
+                dir('backend') {
+                    sh './mvnw clean package -DskipTests'
+                }
             }
         }
 
