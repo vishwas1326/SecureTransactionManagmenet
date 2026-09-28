@@ -62,6 +62,12 @@ pipeline {
 
         stage('Prepare Image') {
 
+    when {
+        anyOf {
+            branch 'develop'
+            branch 'main'
+        }
+    }
             steps {
 
                 script {
@@ -159,7 +165,12 @@ pipeline {
         // ============================================================
 
         stage('Docker Build') {
-
+                when {
+                    anyOf {
+                        branch 'develop'
+                        branch 'main'
+                    }
+                }
             steps {
 
                 /*
@@ -203,7 +214,9 @@ pipeline {
         // ============================================================
 
         stage('ECR Login') {
-
+            when {
+                branch 'main'
+            }
             steps {
 
                 sh '''
@@ -227,7 +240,9 @@ pipeline {
         // ============================================================
 
         stage('Push Image') {
-
+            when {
+                branch 'main'
+            }
             steps {
 
                 sh '''
@@ -246,7 +261,9 @@ pipeline {
         // ============================================================
 
         stage('Verify ECR Image') {
-
+            when {
+                branch 'main'
+            }
             steps {
 
                 sh '''
@@ -270,7 +287,9 @@ pipeline {
         // ============================================================
 
         stage('Deploy to EC2') {
-
+            when {
+                branch 'main'
+            }
             steps {
 
                 script {
@@ -308,7 +327,9 @@ pipeline {
         // ============================================================
 
         stage('Wait for Deployment') {
-
+            when {
+                branch 'main'
+            }
             steps {
 
                 script {
@@ -350,7 +371,9 @@ pipeline {
         // ============================================================
 
         stage('Deployment Result') {
-
+            when {
+                branch 'main'
+            }
             steps {
 
                 script {
@@ -408,7 +431,9 @@ pipeline {
         // ============================================================
 
         stage('Verify Application Health') {
-
+            when {
+                branch 'main'
+            }
             steps {
 
                 script {
