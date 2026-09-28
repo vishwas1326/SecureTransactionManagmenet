@@ -31,7 +31,6 @@ pipeline {
         ECR_REGISTRY =
             '116948313842.dkr.ecr.us-east-2.amazonaws.com'
     }
-w
 
     stages {
 
@@ -61,11 +60,8 @@ w
         // ============================================================
 
         stage('Prepare Image') {
-
     when {
-        anyOf {
-            branch 'main'
-        }
+        branch 'main'
     }
             steps {
 
@@ -164,11 +160,9 @@ w
         // ============================================================
 
         stage('Docker Build') {
-                when {
-                    anyOf {
-                        branch 'main'
-                    }
-                }
+    when {
+        branch 'main'
+    }
             steps {
 
                 /*
@@ -485,34 +479,47 @@ w
 
     post {
 
-        success {
+      success {
 
-            echo "======================================"
-            echo "CI/CD SUCCESS"
-            echo "======================================"
+            script {
 
-            echo "Build Number : ${BUILD_NUMBER}"
-            echo "Git Commit   : ${GIT_SHORT_SHA}"
-            echo "Image        : ${IMAGE_URI}"
-            echo "Instance     : ${APP_INSTANCE_ID}"
+                echo "======================================"
+                echo "PIPELINE SUCCESS"
+                echo "======================================"
+
+                echo "Branch       : ${env.BRANCH_NAME}"
+                echo "Build Number : ${env.BUILD_NUMBER}"
+
+                if (env.BRANCH_NAME == 'main') {
+
+                    echo "Git Commit   : ${env.GIT_SHORT_SHA}"
+                    echo "Image        : ${env.IMAGE_URI}"
+                    echo "Instance     : ${env.APP_INSTANCE_ID}"
+
+                    echo "Production deployment completed successfully."
+
+                } else {
+
+                    echo "CI completed successfully."
+                    echo "No production deployment performed for ${env.BRANCH_NAME}."
+                }
+            }
         }
-
 
         failure {
 
             echo "======================================"
-            echo "CI/CD FAILED"
+            echo "PIPELINE FAILED"
             echo "======================================"
 
+            echo "Branch : ${env.BRANCH_NAME}"
             echo "Check the Jenkins stage that failed."
         }
-
 
         always {
 
             sh '''
                 echo "Cleaning unused Jenkins Docker layers..."
-
                 docker image prune -f || true
             '''
         }
