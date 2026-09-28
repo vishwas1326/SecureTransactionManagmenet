@@ -31,7 +31,7 @@ pipeline {
         ECR_REGISTRY =
             '116948313842.dkr.ecr.us-east-2.amazonaws.com'
     }
-
+w
 
     stages {
 
@@ -64,7 +64,6 @@ pipeline {
 
     when {
         anyOf {
-            branch 'develop'
             branch 'main'
         }
     }
@@ -167,7 +166,6 @@ pipeline {
         stage('Docker Build') {
                 when {
                     anyOf {
-                        branch 'develop'
                         branch 'main'
                     }
                 }
